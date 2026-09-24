@@ -62,17 +62,19 @@
   .btn.ghost{background:transparent;color:var(--indigo);border-color:var(--indigo)}
   .btn.ghost:hover{background:var(--indigo);color:#fff}
 
-  /* ---------- hero: full-bleed speaking photo behind the headline ---------- */
-  .hero{position:relative;padding:0;min-height:88svh;display:flex;align-items:center;overflow:hidden}
-  .hero-bg{position:absolute;inset:0;z-index:0}
-  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:68% 38%;display:block}
+  /* ---------- hero: full-bleed speaking photo behind the headline ----------
+     No cropping: the container takes the photo's own aspect ratio (width:100%,
+     height:auto), so the whole frame — heads included — is always visible. */
+  .hero{position:relative;padding:0;overflow:hidden}
+  .hero-bg{position:relative;z-index:0;line-height:0;background:var(--cream)}
+  .hero-bg img{width:100%;height:auto;display:block}
   .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
     background:linear-gradient(90deg,
       rgba(247,241,230,.97) 0%,
       rgba(247,241,230,.94) 40%,
       rgba(247,241,230,.46) 64%,
       rgba(247,241,230,.05) 100%)}
-  .hero-inner{position:relative;z-index:2;width:100%}
+  .hero-inner{position:absolute;inset:0;z-index:2;display:flex;align-items:center}
   .hero-copy{max-width:640px;padding:96px 0}
   .hero-copy .sub{font-size:1.2rem;color:var(--indigo);max-width:42ch}
 
@@ -105,10 +107,11 @@
   .step h3{font-size:1.15rem;margin-bottom:8px}
   .step p{margin:0;color:var(--indigo)}
 
-  /* ---------- full-width picture band ---------- */
+  /* ---------- full-width picture band ----------
+     Shown whole: no max-height cap and no object-fit, so nothing is cut off. */
   .band{padding:0}
   .band figure{margin:0}
-  .band img{width:100%;height:auto;display:block;max-height:72vh;object-fit:cover}
+  .band img{width:100%;height:auto;display:block}
   .band figcaption{
     max-width:1120px;margin:0 auto;padding:10px 24px 0;font-size:.9rem;color:var(--indigo);
   }
@@ -138,16 +141,16 @@
   /* ---------- responsive ---------- */
   @media (max-width:900px){
     :root{--pad:56px}
-    .hero{min-height:auto;flex-direction:column;align-items:stretch;overflow:visible}
-    .hero-bg{position:relative;height:62svh}
+    .hero{min-height:auto}
+    .hero-bg{position:relative;height:auto}
     .hero-scrim{background:linear-gradient(0deg,
       rgba(247,241,230,.97) 0%,
       rgba(247,241,230,.92) 42%,
       rgba(247,241,230,.10) 100%)}
-    .hero-copy{padding:36px 0 56px;max-width:none}
+    .hero-inner{position:relative;inset:auto;display:block}
+    .hero-copy{padding:28px 24px 56px;max-width:none}
     .cards,.steps{grid-template-columns:1fr}
     .about-grid{grid-template-columns:1fr}
-    .band img{max-height:none}
     .bar nav{display:none}
   }
 </style>
@@ -157,7 +160,7 @@
 <header>
   <div class="wrap bar">
     <a href="#top" style="text-decoration:none">
-      <img src="images/logo.png" alt="Sumega Enquiry Desk logo" width="40" height="40"
+      <img src="images/logo.jpg" alt="Sumega Enquiry Desk logo" width="40" height="40"
            onerror="this.outerHTML='&lt;span class=&quot;wordmark&quot;&gt;Sumega Enquiry Desk&lt;/span&gt;'">
     </a>
     <nav>
@@ -366,7 +369,7 @@
 
 <footer>
   <div class="wrap bar">
-    <img src="images/logo.png" alt="Sumega Enquiry Desk logo" width="28" height="28"
+    <img src="images/logo.jpg" alt="Sumega Enquiry Desk logo" width="28" height="28"
          onerror="this.outerHTML='&lt;span class=&quot;wordmark&quot;&gt;Sumega Enquiry Desk&lt;/span&gt;'">
     <p class="fine">Sumega Enquiry Desk · Hyderabad, India</p>
   </div>
